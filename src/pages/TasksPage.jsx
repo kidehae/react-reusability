@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Items from '../components/Items';
+import Loading from '../components/Loading';
 
 function TasksPage() {
   const [tasks, setTasks] = useState([]);
@@ -27,10 +29,7 @@ function TasksPage() {
 
   if (loading) {
     return (
-      <div className="text-center p-8">
-        <div className="spinner w-10 h-10 border-4 border-gray-200 border-t-4 border-t-blue-500 rounded-full mx-auto"></div>
-        <p className="mt-4 text-gray-600 font-medium">Loading your tasks...</p>
-      </div>
+    <Loading text='Loading your tasks...' size='md' />
     );
   }
 
@@ -44,34 +43,7 @@ function TasksPage() {
   }
 
   return (
-    <div className="p-6 max-w-3xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2 mb-6">
-        My Task List
-      </h1>
-      
-      <ul className="space-y-3">
-        {tasks.map(task => {
-         
-          
-          return (
-            <li 
-              key={task.id}
-              className={`p-4 border rounded-lg shadow-sm flex justify-between items-center ${
-                'bg-white-50' 
-              }`}
-            >
-              <span className={`text-lg  'text-gray-800'`}>
-                {task.text}
-              </span>
-              <span className="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-               {task.description}
-            </span>
-            </li>
-          );
-        })}
-      </ul>
-      
-    </div>
+   <Items title="My Tasks" items={tasks} />
   );
 }
 
